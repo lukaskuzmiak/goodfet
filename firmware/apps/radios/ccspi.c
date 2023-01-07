@@ -120,7 +120,7 @@ int ccspi_tx(u8 *data, int len) {
     return 0;
 #else
     debugstr("Can't TX a packet with SFD and FIFOP definitions.");
-    txdata(app,NOK,0);
+    txdata(CCSPI,NOK,0);
     return 1;
 #endif
 }
@@ -189,9 +189,8 @@ int ccspi_rx(u16 timeout, u8 *pkt, u16 pktsize) {
 
 //! Reflexively jam on the present channel.
 void ccspireflexjam(u16 delay){
-  unsigned long i;
   #if defined(FIFOP) && defined(SFD) && defined(FIFO) && defined(PLED2DIR) && defined(PLED2PIN) && defined(PLED2OUT)
-  
+  unsigned long i;  
   prep_timer();
   debugstr("Reflex jamming until reset.");
   debughex(delay);
